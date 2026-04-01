@@ -1,0 +1,133 @@
+checkpoints:
+  checkpoint_interval: 10
+  checkpoints_path: checkpoints/smollm2-1.7b-cpt-out
+  checkpoints_path_is_shared_file_system: false
+  load_lr_scheduler: false
+  load_optimizer: false
+  resume_checkpoint_path: /media/inno/VLM/huggingface/pretrain/SmolLM2-nanotron-ckpt/1700M/final
+  save_final_state: true
+  save_initial_state: false
+data_stages:
+- data:
+    dataset:
+      dataset_folder:
+      - datasets/smollm2_medical_tokenized/
+      dataset_max_tokens: null
+      dataset_read_path: null
+      dataset_weights:
+      - 1
+      pad_samples_to_global_batch_size: false
+      return_positions: true
+      shuffle_files: false
+      skip_in_stream: false
+      token_size_in_bytes: 2
+      tokenizer_name: HuggingFaceTB/SmolLM2-1.7B
+      use_old_brrr_dataloader: false
+      vocab_size: 49152
+    num_loading_workers: 1
+    seed: 42
+  name: Stable Training Stage
+  sequence_length: 2048
+  start_training_step: 1
+general:
+  benchmark_csv_path: null
+  consumed_train_samples: null
+  ignore_sanity_checks: false
+  project: SmolLM2-1.7B-CPT
+  run: CPT_20260401_010935_local
+  seed: 42
+  step: null
+lighteval: null
+logging:
+  iteration_step_info_interval: 1
+  log_level: info
+  log_level_replica: info
+metrics_logging: null
+model:
+  ddp_bucket_cap_mb: 25
+  dtype: bfloat16
+  init_method:
+    scaling_method: NUM_LAYERS
+    std: 0.025
+  make_vocab_size_divisible_by: 1
+  model_config:
+    _attn_implementation: flash_attention_2
+    _fused_rms_norm: true
+    _fused_rotary_emb: true
+    _use_doc_masking: false
+    _use_qkv_packed: true
+    attention_bias: false
+    bos_token_id: 0
+    eos_token_id: 0
+    flex_attention_mask: null
+    hidden_act: silu
+    hidden_size: 2048
+    initializer_range: 0.02
+    intermediate_size: 8192
+    is_qwen2_config: true
+    log_attn_probs: true
+    max_position_embeddings: 2048
+    moe_config: null
+    no_rope_layer: null
+    num_attention_heads: 32
+    num_hidden_layers: 24
+    num_key_value_heads: 32
+    pad_token_id: null
+    pretraining_tp: 1
+    ring_attn_heads_k_stride: null
+    rms_norm_eps: 1.0e-05
+    rope_interleaved: false
+    rope_scaling: null
+    rope_seq_len_interpolation_factor: null
+    rope_theta: 10000.0
+    sliding_window_size: null
+    tie_word_embeddings: true
+    use_cache: true
+    vocab_size: 49152
+    z_loss_coefficient: 0.0001
+    z_loss_enabled: false
+optimizer:
+  accumulate_grad_in_fp32: true
+  clip_grad: 1.0
+  learning_rate_scheduler:
+    learning_rate: 0.0002
+    lr_decay_starting_step: null
+    lr_decay_steps: 13
+    lr_decay_style: cosine
+    lr_warmup_steps: 2
+    lr_warmup_style: linear
+    min_decay_lr: 2.0e-05
+  optimizer_factory:
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    adam_eps: 1.0e-08
+    name: adamW
+    torch_adam_is_fused: true
+  weight_decay: 0.01
+  weight_decay_exclude_named_params: []
+  zero_stage: 1
+parallelism:
+  context_parallel_size: 1
+  dp: 1
+  expert_parallel_size: 1
+  pp: 1
+  pp_engine: 1f1b
+  recompute_layer: false
+  tp: 1
+  tp_linear_async_communication: false  # 单卡下不需要异步通信
+  tp_mode: REDUCE_SCATTER
+  tp_recompute_allgather: true     # 重计算模式，为True时不保存中间激活层的值，只保留部分参数
+profiler: null
+s3_upload: null
+tokenizer:
+  tokenizer_max_length: null
+  tokenizer_name_or_path: HuggingFaceTB/SmolLM2-1.7B
+  tokenizer_revision: null
+tokens:
+  batch_accumulation_per_replica: 1
+  limit_test_batches: 0
+  limit_val_batches: 0
+  micro_batch_size: 2
+  sequence_length: 2048
+  train_steps: 15
+  val_check_interval: -1
