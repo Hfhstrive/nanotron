@@ -3,6 +3,9 @@ To process HuggingFace Datasets:
     python3 tools/preprocess_data.py --tokenizer-name-or-path meta-llama/Meta-Llama-3-8B --output-folder datasets/emotion --n-tasks 16 hf --dataset dair-ai/emotion
 To process Jsonl files:
     python3 tools/preprocess_data.py --tokenizer-name-or-path meta-llama/Meta-Llama-3-8B --output-folder datasets/c4-es --n-tasks 16 jsonl --dataset raw_datasets/c4-es-json-files
+
+e.g.SmolLM2-1.7B
+python tools/preprocess_data.py --tokenizer-name-or-path HuggingFaceTB/SmolLM2-1.7B --output-folder datasets/smollm2_medical_tokenized --n-tasks 16 jsonl --dataset /media/inno/VLM/huggingface/datasets/medical/pretrain
 """
 
 import argparse
